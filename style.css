@@ -8,10 +8,14 @@ body{
 nav{
   font-family: 'Rajdhani',
   font-weight: 700;
-  background-color: red;
+
 
 }
-
+h5{
+  font-weight: 900;
+  font-family: 'Anton',sans-serif;
+  color: red;
+}
 header {
   position: relative;
   background-color: red;
