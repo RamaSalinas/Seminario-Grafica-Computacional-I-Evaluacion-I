@@ -91,18 +91,17 @@
                         var tercero =   "<img src=\"" + data[x].imagen + "\" class=\"card-img-top\">";
                         var cuarto  =   "<div class=\"card-body\">";
                             var quinto  =   "<h5 class=\"card-title\">" + data[x].nombre + "</h5>"
+                         var sexto  =  "<p id=\"sexto\" class=\"card-text\">"+"Altura: "  + data[x].altura + " Mts" + " </p>";
+                      
+                           if(data[x].velocidad >= 150){
+                                var septimo =   "<p class=\"card-text extremo\">" +"Aceleración: " +  data[x].velocidad + " Km/h" + " </p>"; 
+                           } 
+                else{
+                     var septimo =   "<p class=\"card-text\">" +"Aceleración: " +  data[x].velocidad + " Km/h" + " </p>";
                     
-                            if (parseInt(data[x].Altura) >= 150) {
-                        
-                                var sexto  =  "<p id=\"sexto\" class=\"card-text\">"+"Altura: "  + data[x].altura + " Mts" + " </p>";
-                      }
-                      else {
-                       
-                            
-                          var sexto   =   "<p id_ \"sextob\" class=\"card-text\">"+"Altura: "  + data[x].altura + " Mts" + " </p>";
-                      }
-                            
-                          var septimo =   "<p class=\"card-text\">" +"Aceleración: " +  data[x].velocidad + " Km/h" + " </p>";
+                }
+                         
+               
                         var octavo  = "<p class=\"card-text\">" +  data[x].parque + " </p>"; 
                     var noveno  =   "<p class=\"card-text\">" + data[x].pais + " </p>";
                 var decimo  =   "</div>";
