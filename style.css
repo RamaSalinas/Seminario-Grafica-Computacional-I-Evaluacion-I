@@ -24,7 +24,7 @@ h5{
 p{
    font-family: 'Rajdhani', serif;
   font-weight: 500;
-    color: black;
+    color: black
 } 
 }
 
@@ -69,13 +69,12 @@ header .overlay {
   opacity: 0.2;
   z-index: 1;
 }
-#sexto {
-    Color: red;
+.extremo {
+font-family: 'Anton', sans-serif;
+  font-weight: 500;
+    color: red
 }
 
-#sextob {
-    Color: green;
-}
 @media (pointer: coarse) and (hover: none) {
   header {
     background: black no-repeat center center scroll;
