@@ -14,23 +14,24 @@
 
 <nav>
 
-<nav class="navbar navbar-expand-lg navbar-red bg-dark fixed-top">
-  <a class="navbar-brand" href="#top">LEVANTA LOS BRAZOS!</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#map">Mapa </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#imagenes">Roller Coasters</a>
-      </li>
-
-    </ul>
-  </div>
-</nav>
+ <nav class="navbar navbar-expand-md fixed-top navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#top">LEVANTA LOS BRAZOS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="navbarsExample01" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExample01">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#map">MAPA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#detalles">ROLLER COASTERS</a>
+                </li>
+            </ul>
+        </div>
+      </div>
+    </nav>
 
     <header>
         <div class="overlay"></div>
@@ -74,7 +75,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
-        $.getJSON("https://api.myjson.com/bins/jinqg", function(data) {
+        $.getJSON("https://api.myjson.com/bins/vgurs", function(data) {
 
             console.log(data);
             var mymap = L.map('mapid').setView([45, 0], 2);
@@ -90,10 +91,20 @@
                         var tercero =   "<img src=\"" + data[x].imagen + "\" class=\"card-img-top\">";
                         var cuarto  =   "<div class=\"card-body\">";
                             var quinto  =   "<h5 class=\"card-title\">" + data[x].nombre + "</h5>"
-                            var sexto   =   "<p class=\"card-text\">"+"Altura: "  + data[x].altura + " </p>";
-                            var septimo =   "<p1 class=\"card-text\">" +  data[x].parque + " </p1>";
-                        var octavo  =   "<p2 class=\"card-text\">" + "," + data[x].pais + " </p2>"
-                    var noveno  =   "</div>";
+                    
+                            if (parseInt(data[x].Altura) >= 150) {
+                        
+                                var sexto  =  "<p id=\"sexto\" class=\"card-text\">"+"Altura: "  + data[x].altura + " Mts" + " </p>";
+                      }
+                      else {
+                       
+                            
+                          var sexto   =   "<p id_ \"sextob\" class=\"card-text\">"+"Altura: "  + data[x].altura + " Mts" + " </p>";
+                      }
+                            
+                          var septimo =   "<p class=\"card-text\">" +"Aceleración: " +  data[x].velocidad + " Km/h" + " </p>";
+                        var octavo  = "<p class=\"card-text\">" +  data[x].parque + " </p>"; 
+                    var noveno  =   "<p class=\"card-text\">" + data[x].pais + " </p>";
                 var decimo  =   "</div>";
                 $("#roller").append(primero + segundo + tercero + cuarto + quinto + sexto + septimo + octavo + noveno + decimo);
             }
@@ -110,6 +121,14 @@
                 }
               }
           });
+$(document).scroll(function(){
+         if ($(this).scrollTop() > 650) {
+          $('nav').addClass("rojo");
+         } else {
+          $('nav').removeClass("rojo");
+         }
+      });
+           
     </script>
 
 </body>
