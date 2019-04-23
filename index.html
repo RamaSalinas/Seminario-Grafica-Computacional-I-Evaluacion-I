@@ -42,22 +42,58 @@
             <div class="d-flex h-100 text-center align-items-center">
                 <div class="w-100 text-white">
                     <h1 class="display-3">ROLLING THE WORLD</h1>
-                    <h2 class="lead mb-0">Las Montañas Rusas más Extremas</p>
+                    <h2 class="lead mb-0">Las Montañas Rusas más Extremas</h2>
                 </div>
             </div>
         </div>
     </header>
 
     <section id="map">
-        <div id="mapid" style="width: 100%; height: 70vh;"></div>
+        <div id="mapid" style="width: 100%; height: 70vh;">
+        </div>
     </section>
-    <section id="imagenes" class="bg-dark">
-        <div class="container">
-            <div class="row py-5" id="roller">
 
+    <section id="detalles" class="bg">
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-12 py-3">
+                    Selecciona Donde se encuentran estas Montañas Rusas
+                    <select id="selector" onchange="mostrador()">
+                        <option>Todas</option>
+                        <option>Montañas de America </option>
+                        <option>Montañas de Europa</option>
+                        <option>Montañas de Asia</option>
+                     
+                    </select>
+                    
+                </div>
+            </div>
+        </div>
+   
+    </section>
+   
+    <section class="bg-dark">
+        <div class="container">
+            <div class="row py-3" id="roller">    
+             </div>
+            </div>       
+    </section>
+     
+
+    <section class="bg-dark">
+        <div class="container">
+            <div class="row py-3">
+                <div class="card-columns" id="roller">
+                    <!--aquí hay un cambio-->
+                </div>
             </div>
         </div>
     </section>
+
+    <section id="novedad">
+        <!--aquí coloco la "visualización"-->
+    </section>
+
 
     <footer>
       <section id="detalles">
@@ -75,7 +111,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
-        $.getJSON("https://api.myjson.com/bins/vgurs", function(data) {
+        $.getJSON("https://api.myjson.com/bins/fffw0", function(data) {
 
             console.log(data);
             var mymap = L.map('mapid').setView([45, 0], 3);
@@ -91,7 +127,7 @@
                 });
                 L.marker([data[x].ubicacion[0], data[x].ubicacion[1]], {icon: Icon}).addTo(mymap).bindPopup(data[x].nombre).closePopup();
                 var primero =   "<div class=\"col-sm-4 col-lg-4 my-4\">";
-                    var segundo =   "<div class=\"card\">";
+                    var segundo =   "<div class=\"card " + data[x].continente + "\">";
                         var tercero =   "<img src=\"" + data[x].imagen + "\" class=\"card-img-top\">";
                         var cuarto  =   "<div class=\"card-body\">";
                             var quinto  =   "<h5 class=\"card-title\">" + data[x].nombre + "</h5>"
@@ -112,6 +148,25 @@
                 $("#roller").append(primero + segundo + tercero + cuarto + quinto + sexto + septimo + octavo + noveno + decimo);
             }
         });
+        
+          function mostrador() {
+            
+            var x = document.getElementById("selector").value;
+            console.log(x);
+            
+            if (x.includes("America")) {
+                $(".america").show();
+                $(".europa, .asia").hide()
+            } else if (x.includes("Europa")) {
+                $(".europa").show()
+                $(".america, .asia").hide()
+            } else if (x.includes("Asia")) {
+                $(".asia").show();
+                $(".europa, .america").hide()
+            } else {
+                $(".america, .asia, .europa").show()
+            }
+        }
         $('a[href*="#"]:not([href="#"])').click(function() {
               if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
                 var target = $(this.hash);
@@ -132,6 +187,28 @@ $(document).scroll(function(){
          }
       });
            
+    </script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script>
+       var montana;
+
+function preload() {
+  montana = loadJSON("https://api.myjson.com/bins/fffw0");
+}
+
+function setup() {
+  createCanvas(windowWidth, 600).parent("novedad");
+    noStroke();
+    textAlign(CENTER);
+    rectMode(CENTER);
+      text('¿Que tan veloces son?', width/2, 100);
+  for (var y = 0; y < 9; y++) {
+    ellipse((width / 10) * (y + 1), height/2, montana[y].velocidad / 5 , montana[y].velocidad);
+    text(montana[y].nombre, (width / 10) * (y + 1), (height/2)+150,50,50);
+  }
+}
+
     </script>
 
 </body>
